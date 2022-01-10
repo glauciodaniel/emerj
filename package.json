@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "git": "git add --all && git commit -m\"$desc\" && git push origin master"
+    "git": "git add --all && git commit -m\"Deploy\" && git push origin master"
   },
   "repository": {
     "type": "git",
