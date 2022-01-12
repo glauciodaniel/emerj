@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { Prisma, User as UserModel } from '@prisma/client';
 import { CreateUserDTO } from './dto/createUser.dto';
+import { EditUserDTO } from './dto/editUser.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -21,10 +22,11 @@ export class UserController {
   async getUsers(): Promise<UserModel[]> {
     return this.userService.getUsers();
   }
-  @Get(':id')
+  @Get('/:id')
   async getUserById(@Param('id') id: number): Promise<UserModel> {
     return this.userService.getUserById(id);
   }
+
   @Post()
   async createUser(@Body() userData: CreateUserDTO): Promise<UserModel> {
     // const { name, email, password } = userData;
@@ -32,11 +34,16 @@ export class UserController {
   }
 
   @Put(':id')
-  async updateUser() {
-    return 'Executando via put, alterando um usuário';
+  async updateUser(
+    @Body() userData: EditUserDTO,
+    @Param('id') userId: number,
+  ): Promise<UserModel> {
+    userData.userId = userId;
+    return this.userService.updateUser(userData);
   }
+
   @Delete(':id')
-  async deleteUser() {
-    return 'Executando via delete, excluindo um usuário';
+  async deleteUser(@Param('id') userId: number) {
+    return this.userService.deleteUser(userId);
   }
 }
