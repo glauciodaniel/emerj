@@ -7,6 +7,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    console.log('Bem vindo ao curso NodeJS com NestJS');
     return this.appService.getHello();
   }
 }
