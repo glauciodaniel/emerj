@@ -17,9 +17,14 @@ export class UserService {
   }
 
   async createUser(data: Prisma.UserCreateInput): Promise<UserModel> {
-    return this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data,
     });
+
+    //envio do email se user existe!
+    //...
+
+    return user;
   }
 
   async updateUser(userData: EditUserDTO): Promise<UserModel> {
