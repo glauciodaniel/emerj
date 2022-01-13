@@ -25,6 +25,7 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^3.8.0",
+    "bcrypt": "^5.0.1",
     "class-validator": "^0.13.2",
     "googleapis": "^92.0.0",
     "nodemailer": "^6.7.2",

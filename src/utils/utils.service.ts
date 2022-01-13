@@ -7,7 +7,6 @@ export class UtilsService {
   async sendMail(
     emailTo: string,
     emailSubject: string,
-    emailBody: string,
     options = { body: '', bCC: '', attached: '' },
   ) {
     // configuração esse trecho deve ser pelo menos um método a parte.
