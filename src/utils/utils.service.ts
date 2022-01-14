@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { google } from 'googleapis';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UtilsService {
+  async convertPassword(password: string): Promise<string> {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    return hashedPassword;
+  }
+
   async sendMail(
     emailTo: string,
     emailSubject: string,

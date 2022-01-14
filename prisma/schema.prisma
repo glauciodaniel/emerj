@@ -16,6 +16,7 @@ model User {
   name               String
   password           String
   created_at         DateTime?            @default(now())
+  active             Int                  @default(0)
   UserPasswordForgot UserPasswordForgot[]
 }
 

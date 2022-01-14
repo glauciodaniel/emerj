@@ -20,15 +20,12 @@ export class UserService {
       where: { id: Number(id) },
     });
   }
-  async convertPassword(password: string): Promise<string> {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
 
-    return hashedPassword;
-  }
+  //se seus códigos forem muito úteis, cria um NPM package.
+  //privado, repositório do NPM.
   async createUser(data: Prisma.UserCreateInput): Promise<UserModel> {
     //ao criar a senha estamos enviando o parâmetro data.
-    data.password = await this.convertPassword(data.password);
+    data.password = await this.utilsService.convertPassword(data.password);
     //data.password = senha criptografada
     const user = await this.prisma.user.create({
       data,
@@ -56,12 +53,13 @@ export class UserService {
 
   async updateUser(userData: EditUserDTO): Promise<UserModel> {
     const { name, email, password, userId } = userData;
+    const hashedPassword = await this.utilsService.convertPassword(password);
 
     return this.prisma.user.update({
       where: {
         id: +userId,
       },
-      data: { name, email, password },
+      data: { name, email, password: hashedPassword },
     });
   }
 
