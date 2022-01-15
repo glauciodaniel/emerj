@@ -11,6 +11,7 @@ import { Prisma, User as UserModel } from '@prisma/client';
 import { CreateUserDTO } from './dto/createUser.dto';
 import { EditUserDTO } from './dto/editUser.dto';
 import { UserService } from './user.service';
+import { Public } from '../auth/public.decorator';
 
 @Controller('user')
 export class UserController {
@@ -27,6 +28,7 @@ export class UserController {
     return this.userService.getUserById(id);
   }
 
+  @Public()
   @Post()
   async createUser(@Body() userData: CreateUserDTO): Promise<UserModel> {
     // const { name, email, password } = userData;
