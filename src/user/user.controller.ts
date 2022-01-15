@@ -28,7 +28,6 @@ export class UserController {
     return this.userService.getUserById(id);
   }
 
-  @Public()
   @Post()
   async createUser(@Body() userData: CreateUserDTO): Promise<UserModel> {
     // const { name, email, password } = userData;
