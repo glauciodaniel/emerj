@@ -19,6 +19,7 @@ export class UserController {
 
   //CRUD - Create, Read, Update, Delete
   //
+  @Public()
   @Get()
   async getUsers(): Promise<UserModel[]> {
     return this.userService.getUsers();
